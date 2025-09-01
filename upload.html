@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload de Assets Gamer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #eee;
+      padding: 20px;
+    }
+    h1 {
+      color: #00ffcc;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin-top: 5px;
+    }
+    button {
+      background-color: #00ffcc;
+      color: #000;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .preview {
+      margin-top: 10px;
+      background-color: #222;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .preview ul {
+      list-style: none;
+      padding: 0;
+    }
+    .preview li {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📤 Enviar Asset para o Site</h1>
+  <form>
+    <div class="form-group">
+      <label>Nome do Jogo:</label>
+      <input type="text" name="gameName" required>
+    </div>
+
+    <div class="form-group">
+      <label>Data de Lançamento:</label>
+      <input type="date" name="releaseDate" required>
+    </div>
+
+    <div class="form-group">
+      <label>Betas (Obrigatório):</label>
+      <textarea name="betas" rows="3" required placeholder="Ex: Beta 1 - 2011, Beta 2 - 2012..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Versão (Opcional):</label>
+      <input type="text" name="version" placeholder="Ex: 1.0, Final, Demo...">
+    </div>
+
+    <div class="form-group">
+      <label>Plataformas (Obrigatório):</label>
+      <input type="text" name="platforms" required placeholder="Ex: Wii, PC, Android...">
+    </div>
+
+    <div class="form-group">
+      <label>Ícone da Plataforma (Obrigatório):</label>
+      <input type="file" accept=".png,.jpg,.svg" required>
+    </div>
+
+    <div class="form-group">
+      <label>Selecionar Arquivos do Jogo (Modelos, Sons, Texturas):</label>
+      <input type="file" id="gameFiles" multiple accept=".obj,.mp3,.ogg,.dds,.adx,.png,.bmp,.bin,.zno,.znm,.amb,.md,.dc">
+    </div>
+
+    <div class="preview" id="filePreview">
+      <strong>📂 Arquivos Selecionados:</strong>
+      <ul id="fileList"></ul>
+    </div>
+
+    <div class="form-group">
+      <label>Comentário (Opcional):</label>
+      <textarea name="comment" rows="4" placeholder="Compartilhe curiosidades, bugs ou memórias burritescas..."></textarea>
+    </div>
+
+    <button type="submit">Enviar Asset</button>
+  </form>
+
+  <p><a href="index.html">⬅️ Voltar à Página Inicial</a></p>
+
+  <script>
+    const input = document.getElementById('gameFiles');
+    const fileList = document.getElementById('fileList');
+
+    input.addEventListener('change', () => {
+      fileList.innerHTML = '';
+      for (const file of input.files) {
+        const li = document.createElement('li');
+        li.textContent = `${file.name} (${Math.round(file.size / 1024)} KB)`;
+        fileList.appendChild(li);
+      }
+    });
+  </script>
+
+</body>
+</html>
